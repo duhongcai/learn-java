@@ -23,7 +23,7 @@ public class FinalTest {
 
     public static void main(String[] args) {
         for (int i = 0; i < 10000; i++) {
-             int finalI = i;
+             final int finalI = i;
             Thread thread = new Thread(new Runnable(){
                @Override
                public void run() {

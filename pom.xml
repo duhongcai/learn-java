@@ -7,4 +7,11 @@
     <groupId>cn.qtec.learn</groupId>
     <artifactId>learn-java</artifactId>
     <version>1.0.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+    </dependencies>
 </project>

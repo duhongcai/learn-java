@@ -1,7 +1,6 @@
 package cn.qtec.learn.multiThread;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,17 +19,19 @@ public class ConnectionPoolTest {
         AtomicInteger got = new AtomicInteger();
         AtomicInteger notGot = new AtomicInteger();
         for (int i = 0; i < threadCount; i++) {
-            Thread thread = new Thread(new ConnectionRunner(count,got,notGot),"ConnectionRunnerThread - " + i);
+            Thread thread = new Thread(new ConnectionRunner(count, got, notGot), "ConnectionRunnerThread - " + i);
             thread.start();
         }
         start.countDown();
+        System.out.println("开始运行11");
         end.await();
+        System.out.println("开始运行22");
         System.out.println("total invoke " + (threadCount * count));
         System.out.println("got connection " + got);
         System.out.println("not got connection" + notGot);
     }
 
-    static class ConnectionRunner implements Runnable{
+    static class ConnectionRunner implements Runnable {
         int count;
         AtomicInteger got;
         AtomicInteger notGot;
@@ -46,23 +47,24 @@ public class ConnectionPoolTest {
                 start.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }while (count>0){
+            }
+            while (count > 0) {
                 try {
                     Connection connection = pool.fetchConnection(1000);
-                    if (connection != null){
+                    if (connection != null) {
                         try {
                             connection.createStatement();
                             connection.commit();
-                        }finally {
+                        } finally {
                             pool.releaseConnection(connection);
                             got.incrementAndGet();
                         }
-                    }else {
+                    } else {
                         notGot.incrementAndGet();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     count--;
                 }
             }

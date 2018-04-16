@@ -1,0 +1,2 @@
+使用java操作rabbitmq，实现生产者和消费者，熟悉rabbitmq的消息分发模式
+使用spring-amqp API，熟悉基本用法
