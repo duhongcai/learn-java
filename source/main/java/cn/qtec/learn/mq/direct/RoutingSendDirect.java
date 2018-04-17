@@ -11,7 +11,7 @@ import java.util.concurrent.TimeoutException;
  * Created by duhc on 2018/4/13.
  */
 public class RoutingSendDirect {
-    public static final String EXCHANGE_NAME = "direct_logs";
+    public static final String EXCHANGE_NAME = "direct_name";
     public static final String[] routingKeys = new String[]{"info","warning","error"};
 
     public static void main(String[] args) throws IOException, TimeoutException {
